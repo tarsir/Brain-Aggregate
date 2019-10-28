@@ -12,7 +12,8 @@
       <section class="container">
         <nav role="navigation">
           <ul>
-            <li><a href="#">Ask a Question</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="<%= Routes.question_path(@conn, :ask_new) %>">Ask a Question</a></li>
           </ul>
         </nav>
       </section>

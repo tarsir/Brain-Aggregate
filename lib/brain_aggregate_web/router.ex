@@ -17,6 +17,8 @@ defmodule BrainAggregateWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    resources "/questions", QuestionController
+    get "/ask_new", QuestionController, :ask_new
   end
 
   # Other scopes may use custom stacks.
