@@ -1,0 +1,18 @@
+<h1>Show Answer</h1>
+
+<ul>
+
+  <li>
+    <strong>Contents:</strong>
+    <%= @answer.contents %>
+  </li>
+
+  <li>
+    <strong>Is accepted:</strong>
+    <%= @answer.is_accepted %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.answer_path(@conn, :edit, @answer) %></span>
+<span><%= link "Back", to: Routes.answer_path(@conn, :index) %></span>

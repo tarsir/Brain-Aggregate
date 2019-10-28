@@ -1,0 +1,6 @@
+<h1>Add Answer to <%= @question.title %></h1>
+
+<h3>Question text:</h3>
+<p><%= @question.contents %></p>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.answer_path(@conn, :create, @question.id)) %>

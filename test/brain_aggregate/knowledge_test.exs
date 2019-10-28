@@ -63,4 +63,65 @@ defmodule BrainAggregate.KnowledgeTest do
       assert %Ecto.Changeset{} = Knowledge.change_question(question)
     end
   end
+
+  describe "answers" do
+    alias BrainAggregate.Knowledge.Answer
+
+    @valid_attrs %{contents: "some contents", is_accepted: true}
+    @update_attrs %{contents: "some updated contents", is_accepted: false}
+    @invalid_attrs %{contents: nil, is_accepted: nil}
+
+    def answer_fixture(attrs \\ %{}) do
+      {:ok, answer} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Knowledge.create_answer()
+
+      answer
+    end
+
+    test "list_answers/0 returns all answers" do
+      answer = answer_fixture()
+      assert Knowledge.list_answers() == [answer]
+    end
+
+    test "get_answer!/1 returns the answer with given id" do
+      answer = answer_fixture()
+      assert Knowledge.get_answer!(answer.id) == answer
+    end
+
+    test "create_answer/1 with valid data creates a answer" do
+      assert {:ok, %Answer{} = answer} = Knowledge.create_answer(@valid_attrs)
+      assert answer.contents == "some contents"
+      assert answer.is_accepted == true
+    end
+
+    test "create_answer/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Knowledge.create_answer(@invalid_attrs)
+    end
+
+    test "update_answer/2 with valid data updates the answer" do
+      answer = answer_fixture()
+      assert {:ok, %Answer{} = answer} = Knowledge.update_answer(answer, @update_attrs)
+      assert answer.contents == "some updated contents"
+      assert answer.is_accepted == false
+    end
+
+    test "update_answer/2 with invalid data returns error changeset" do
+      answer = answer_fixture()
+      assert {:error, %Ecto.Changeset{}} = Knowledge.update_answer(answer, @invalid_attrs)
+      assert answer == Knowledge.get_answer!(answer.id)
+    end
+
+    test "delete_answer/1 deletes the answer" do
+      answer = answer_fixture()
+      assert {:ok, %Answer{}} = Knowledge.delete_answer(answer)
+      assert_raise Ecto.NoResultsError, fn -> Knowledge.get_answer!(answer.id) end
+    end
+
+    test "change_answer/1 returns a answer changeset" do
+      answer = answer_fixture()
+      assert %Ecto.Changeset{} = Knowledge.change_answer(answer)
+    end
+  end
 end

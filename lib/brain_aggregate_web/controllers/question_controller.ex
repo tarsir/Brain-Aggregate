@@ -32,7 +32,7 @@ defmodule BrainAggregateWeb.QuestionController do
   end
 
   def show(conn, %{"id" => id}) do
-    question = Knowledge.get_question!(id)
+    {:ok, question} = Knowledge.get_question(id)
     render(conn, "show.html", question: question)
   end
 
