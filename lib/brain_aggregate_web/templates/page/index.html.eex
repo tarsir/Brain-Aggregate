@@ -1,0 +1,9 @@
+<h2>Hot Questions</h2>
+
+<ul>
+  <%= for question <- @hot_questions do %>
+    <li>
+      <%= link(question.title, to: Routes.question_path(@conn, :show, question.id)) %>
+    </li>
+  <% end %>
+</ul>
