@@ -1,7 +1,6 @@
 <h1>Show Question</h1>
 
 <ul>
-
   <li>
     <strong>Title:</strong>
     <%= @question.title %>
@@ -11,8 +10,22 @@
     <strong>Contents:</strong>
     <%= @question.contents %>
   </li>
-
 </ul>
+
+<%= if Enum.empty?(@question.answers) do %>
+  <span>
+    <%= link "Be the first to answer this question!", to: Routes.answer_path(@conn, :new, @question.id) %>
+  </span>
+<% else %>
+  <ul>
+    <%= for answer <- @question.answers do %>
+      <li>
+        <%= answer.contents %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
 
 <span><%= link "Edit", to: Routes.question_path(@conn, :edit, @question) %></span>
 <span><%= link "Back", to: Routes.question_path(@conn, :index) %></span>
+<span><%= link "Answer this question!", to: Routes.answer_path(@conn, :new, @question.id) %>

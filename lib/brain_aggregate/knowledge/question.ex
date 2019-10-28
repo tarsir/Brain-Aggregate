@@ -6,6 +6,7 @@ defmodule BrainAggregate.Knowledge.Question do
     field :contents, :string
     field :title, :string
 
+    has_many(:answers, BrainAggregate.Knowledge.Answer)
     timestamps()
   end
 

@@ -19,6 +19,8 @@ defmodule BrainAggregateWeb.Router do
     get "/", PageController, :index
     resources "/questions", QuestionController
     get "/ask_new", QuestionController, :ask_new
+    get "/answer/:question_id", AnswerController, :new
+    post "/answer/:question_id", AnswerController, :create
   end
 
   # Other scopes may use custom stacks.
